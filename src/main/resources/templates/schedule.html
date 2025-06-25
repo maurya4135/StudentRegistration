@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Schedule</title>
+    <link rel="stylesheet" th:href="@{/css/schedule.css}" />
+</head>
+<body>
+
+<h1>My Schedule</h1>
+
+<a th:href="@{/dashboard}" class="back-button">Back to Dashboard</a>
+
+<!-- Display flash messages for success or error after dropping a course -->
+<div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+<div th:if="${#lists.isEmpty(enrolledCourses)}">
+    <p>You are not currently enrolled in any courses.</p>
+</div>
+
+<table th:if="${!#lists.isEmpty(enrolledCourses)}">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Instructor</th>
+        <th>Schedule</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Location</th>
+        <th>Type</th>
+        <th>Credits</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course : ${enrolledCourses}">
+        <td th:text="${course.code}"></td>
+        <td th:text="${course.name}"></td>
+        <td th:text="${course.instructor}"></td>
+        <td th:text="${course.daysTimes}"></td>
+        <td th:text="${course.startDate != null ? #temporals.format(course.startDate, 'MMM dd, yyyy') : 'N/A'}"></td>
+        <td th:text="${course.endDate != null ? #temporals.format(course.endDate, 'MMM dd, yyyy') : 'N/A'}"></td>
+        <td th:text="${course.location}"></td>
+        <td th:text="${course.type}"></td>
+        <td th:text="${course.credit}"></td>
+        <td>
+            <form th:action="@{/drop/{courseId}(courseId=${course.id})}" method="post" style="margin:0;">
+                <button type="submit" class="button-drop">Drop</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

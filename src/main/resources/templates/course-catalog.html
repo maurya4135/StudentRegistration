@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Catalog</title>
+    <link rel="stylesheet" th:href="@{/css/course-catalog.css}" />
+</head>
+<body>
+
+<h1>Course Catalog</h1>
+
+<a th:href="@{/dashboard}" class="back-button">Back to Dashboard</a>
+
+<!-- Display flash messages for success or error after enrollment attempts -->
+<div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+<div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Instructor</th>
+        <th>Schedule</th>
+        <th>Location</th>
+        <th>Type</th>
+        <th>Semester</th>
+        <th>Credits</th>
+        <th>Total Cost</th>
+        <th>Seats</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course : ${allCourses}">
+        <td th:text="${course.code}"></td>
+        <td th:text="${course.name}"></td>
+        <td th:text="${course.instructor}"></td>
+        <td th:text="${course.daysTimes}"></td>
+        <td th:text="${course.location}"></td>
+        <td th:text="${course.type}"></td>
+        <td th:text="${course.semester}"></td>
+        <td th:text="${course.credit}"></td>
+        <td th:text="${#numbers.formatCurrency(course.credit * course.costPerCredit)}"></td>
+        <td><span th:text="${course.enrolledCount}"></span> / <span th:text="${course.capacity}"></span></td>
+        <td>
+            <span th:if="${enrolledCourseIds.contains(course.id)}">
+                <form th:action="@{/drop/{courseId}(courseId=${course.id})}" method="post" style="margin:0;">
+                    <button type="submit" class="button-drop">Drop</button>
+                </form>
+            </span>
+            <span th:if="${!enrolledCourseIds.contains(course.id) and course.enrolledCount >= course.capacity}"><button disabled>Full</button></span>
+            <span th:if="${!enrolledCourseIds.contains(course.id) and course.enrolledCount < course.capacity}">
+                <form th:action="@{/enroll/{courseId}(courseId=${course.id})}" method="post" style="margin:0;">
+                    <button type="submit" class="button-enroll">Enroll</button>
+                </form>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}" />
+</head>
+
+<body>
+    <header class="dashboard-header">
+        <h1>University Portal</h1>
+        <nav>
+            <a th:href="@{/dashboard}">Back to Dashboard</a>
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h1>Edit Your Profile</h1>
+
+            <!-- Display messages (success or error) -->
+            <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <form th:action="@{/profile/edit}" th:object="${student}" method="post">
+                <!-- Hidden ID field is crucial for updating an existing entity -->
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" th:field="*{firstName}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" th:field="*{lastName}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" th:field="*{dob}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <!-- Email is used for login. If you change it, you must use the new email to log in next time. -->
+                    <input type="email" id="email" th:field="*{email}" required />
+                </div>
+
+                <!-- Student ID can also be displayed but not edited -->
+                <div class="form-group">
+                    <label for="studentId">Student ID:</label>
+                    <input type="text" id="studentId" th:field="*{studentId}" readonly />
+                </div>
+
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

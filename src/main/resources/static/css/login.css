@@ -1,0 +1,179 @@
+/* General Body Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    padding: 1rem; /* Add some padding for smaller screens */
+    box-sizing: border-box;
+}
+
+/* New Auth Container */
+.auth-container {
+    display: flex;
+    width: 100%;
+    max-width: 900px; /* Widened container */
+    min-height: 550px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* Ensures child elements conform to border-radius */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Info Panel (Side Div) */
+.info-panel {
+    flex: 1;
+    background-color: #4e54c8;
+    color: #fff;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.info-panel h1 {
+    font-size: 3rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.info-panel p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: auto; /* Pushes the switch-link to the bottom */
+}
+
+.switch-link {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.switch-link span {
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.switch-link a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.switch-link a:hover {
+    background-color: #fff;
+    color: #4e54c8;
+}
+
+/* Form Panel */
+.form-panel {
+    flex: 1.5;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #ffffff; /* The form side is solid white */
+}
+
+/* The form itself has minimal styling now */
+.login-form {
+    width: 100%;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Error Message */
+.error-message {
+    background-color: rgba(255, 105, 105, 0.9);
+    color: #fff;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+.error-message p {
+    margin: 0;
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+.input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    color: #333;
+    font-size: 1rem;
+}
+.input-group input::placeholder { color: #999; }
+.input-group input:focus {
+    outline: none;
+    border-color: #4e54c8;
+    box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.2);
+}
+
+/* Submit Button */
+button[type="submit"] {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: #4e54c8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+button[type="submit"]:hover {
+    background-color: #3b40a4;
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+        max-width: 420px; /* Revert to smaller width for stacked view */
+        min-height: auto;
+    }
+    .info-panel {
+        padding: 2rem;
+    }
+    .info-panel h1 {
+        font-size: 2.5rem;
+    }
+    .info-panel p {
+        margin-bottom: 1rem; /* Adjust spacing for stacked view */
+    }
+    .form-panel {
+        padding: 2rem;
+    }
+}

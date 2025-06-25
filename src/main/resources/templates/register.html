@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}" />
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Info Panel -->
+        <div class="info-panel">
+            <h1>Register</h1>
+            <p>Enter your information to create a new account.</p>
+            <div class="switch-link">
+                <span>Already have an account?</span>
+                <a th:href="@{/login}">Login here</a>
+            </div>
+        </div>
+
+        <!-- Form Panel -->
+        <div class="form-panel">
+            <form class="login-form" th:action="@{/register}" th:object="${student}" method="post">
+                <!-- Success/Error Message Display -->
+                <div th:if="${message}" class="success-message">
+                    <p th:text="${message}"></p>
+                </div>
+                <div th:if="${error}" class="error-message">
+                    <p th:text="${error}"></p>
+                </div>
+
+                <div class="input-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" th:field="*{firstName}" placeholder="Enter your first name" required />
+                </div>
+                <div class="input-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" th:field="*{lastName}" placeholder="Enter your last name" required />
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" th:field="*{email}" placeholder="Enter your email" required />
+                </div>
+                <div class="input-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" th:field="*{dob}" required />
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required />
+                </div>
+
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

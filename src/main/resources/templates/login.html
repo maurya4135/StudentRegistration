@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Info Panel -->
+        <div class="info-panel">
+            <h1>Login</h1>
+            <p>Use your email and password to access your account.</p>
+            <div class="switch-link">
+                <span>Not a user yet?</span>
+                <a th:href="@{/register}">Register here</a>
+            </div>
+        </div>
+
+        <!-- Form Panel -->
+        <div class="form-panel">
+            <form class="login-form" th:action="@{/login}" method="post">
+                <!-- Message Display for errors, logout, and registration success -->
+                <div th:if="${param.error}" class="error-message">
+                    <p>Invalid email or password.</p>
+                </div>
+                <div th:if="${param.logout}" class="success-message">
+                    <p>You have been logged out successfully.</p>
+                </div>
+                <div th:if="${message}" class="success-message">
+                    <p th:text="${message}"></p>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required autofocus />
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                </div>
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
